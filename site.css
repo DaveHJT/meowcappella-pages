@@ -1,0 +1,70 @@
+/* 喵卡贝拉 · 静态页共用样式。纸色底、暖墨字，和游戏的纸面画风一个颜色；夜里换成温泉的夜色。 */
+:root {
+  --paper: #faf7f1;
+  --card: #fffdf8;
+  --ink: #2b221e;
+  --muted: #6f625a;
+  --line: #e6ddd0;
+  --accent: #c8792f;
+  --mark: #f3c969;
+  --code: #f1ebe0;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #161a2b;
+    --card: #1e2338;
+    --ink: #f1e9dc;
+    --muted: #b3a998;
+    --line: #333a55;
+    --accent: #f0a85a;
+    --mark: #8a6a2a;
+    --code: #262c45;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #161a2b; --card: #1e2338; --ink: #f1e9dc; --muted: #b3a998; --line: #333a55;
+  --accent: #f0a85a; --mark: #8a6a2a; --code: #262c45; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font: 16px/1.75 -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", sans-serif;
+}
+main { max-width: 720px; margin: 0 auto; padding: 32px 16px 64px; }
+header.top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+header.top img { width: 48px; height: 48px; border-radius: 12px; }
+header.top .name { font-weight: 700; font-size: 18px; }
+nav.pages { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; margin: 4px 0 24px; }
+nav.pages a { color: var(--muted); text-decoration: none; }
+nav.pages a[aria-current="page"] { color: var(--ink); font-weight: 600; }
+.langs { margin-left: auto; display: flex; gap: 6px; }
+.langs button {
+  font: inherit; font-size: 13px; padding: 2px 10px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--line); background: var(--card); color: var(--ink);
+}
+.langs button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+h1 { font-size: 28px; line-height: 1.3; margin: 8px 0 4px; }
+h2 { font-size: 19px; margin: 32px 0 6px; }
+h3 { font-size: 16px; margin: 22px 0 4px; }
+p, ul, ol { margin: 6px 0 12px; }
+ul, ol { padding-left: 1.3em; }
+li { margin: 3px 0; }
+a { color: var(--accent); }
+.meta { color: var(--muted); font-size: 14px; }
+.lead { font-size: 18px; padding: 14px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; }
+code, kbd { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .9em; background: var(--code); padding: 1px 5px; border-radius: 4px; }
+.placeholder { background: var(--mark); color: var(--ink); padding: 0 4px; border-radius: 3px; }
+details { border-top: 1px solid var(--line); padding: 10px 0; }
+details summary { cursor: pointer; font-weight: 600; }
+details[open] summary { margin-bottom: 4px; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { text-align: left; vertical-align: top; padding: 7px 10px 7px 0; border-bottom: 1px solid var(--line); }
+th { color: var(--muted); font-weight: 500; white-space: nowrap; }
+footer { margin-top: 48px; color: var(--muted); font-size: 13px; }
+/* 两种语言都写在页面里；有脚本时只显示一种，没有脚本时两种都看得到。 */
+html.js [lang="en"][data-l], html.js [lang="zh-CN"][data-l] { display: none; }
+html.js.show-en [lang="en"][data-l], html.js.show-zh [lang="zh-CN"][data-l] { display: block; }
+@media print { .langs, nav.pages { display: none; } html.js [data-l] { display: block !important; } }
